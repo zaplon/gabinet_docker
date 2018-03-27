@@ -1,4 +1,8 @@
-version: '2'
+version: "3"
+
+volumes:
+  static:
+
 services:
   mysql:
     image: "mysql"
@@ -17,10 +21,10 @@ services:
     image: "docker.io/zaplon/gabinet_prod:latest"
     restart: always
     working_dir: /app/
+    volumes:
+      - static:/app/public/static/
     links:
       - mysql
-    volumes:
-      - ./public/:/app/public/
     command: uwsgi --http 0.0.0.0:9001 --module docker_wsgi_configuration_module
   elasticsearch:
     image: elasticsearch
@@ -38,8 +42,8 @@ services:
       - ./nginx/sites-enabled/:/etc/nginx/sites-enabled/
       - ./nginx/sites-available/:/etc/nginx/sites-available/
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./public/static/:/static/
       - ./public/media/:/media/
+      - static:/static/
     ports:
       - "80:80"
       - "443:443"
