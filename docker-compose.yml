@@ -26,8 +26,8 @@ services:
     links:
       - mysql
     command: uwsgi --http 0.0.0.0:9001 --module docker_wsgi_configuration_module
-  elasticsearch:
-    image: elasticsearch
+#  elasticsearch:
+#    image: elasticsearch
   wkhtmltopdf:
     image: michaelperrin/wkhtmltopdf:latest
   nginx:
