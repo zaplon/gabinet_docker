@@ -1,4 +1,4 @@
 FROM docker.io/zaplon/gabinet
-ADD . /code
-WORKDIR /code
-CMD docker-compose run web ./docker/web/build.sh
+ENV DJANGO_SETTINGS_MODULE production_settings
+ADD . /app
+WORKDIR /app
